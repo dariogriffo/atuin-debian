@@ -1,0 +1,17 @@
+Source: atuin
+Section: utils
+Priority: optional
+Maintainer: Dario Griffo <dariogriffo@gmail.com>
+Build-Depends: debhelper-compat (= 13), wget, ca-certificates
+Standards-Version: 4.6.2
+Homepage: https://github.com/atuinsh/atuin
+Rules-Requires-Root: no
+
+Package: atuin
+Architecture: amd64 arm64
+Depends: ${misc:Depends}
+Description: Magical shell history
+ atuin replaces your existing shell history with a SQLite database, and
+ records additional context for your commands. Additionally, it provides
+ optional and fully encrypted synchronisation of your history between
+ machines, via an atuin server.

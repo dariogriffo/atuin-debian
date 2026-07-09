@@ -1,0 +1,9 @@
+Section: utils
+Priority: optional
+Maintainer: Dario Griffo <dariogriffo@gmail.com>
+Homepage: https://github.com/atuinsh/atuin
+Package: atuin
+Version: atuin_VERSION-BUILD_VERSION+DIST
+Architecture: SUPPORTED_ARCHITECTURES
+Description: Magical shell history.
+

@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+ATUIN_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/[-~].*//')
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	@arch="$(DEB_HOST_ARCH)"; \
+	case "$$arch" in \
+		amd64) ATUIN_RELEASE="atuin-x86_64-unknown-linux-musl" ;; \
+		arm64) ATUIN_RELEASE="atuin-aarch64-unknown-linux-musl" ;; \
+		*) echo "Unsupported architecture: $$arch"; exit 1 ;; \
+	esac; \
+	echo "Downloading $$ATUIN_RELEASE for v$(ATUIN_VERSION)..."; \
+	wget -q "https://github.com/atuinsh/atuin/releases/download/v$(ATUIN_VERSION)/$$ATUIN_RELEASE.tar.gz"; \
+	tar -xf "$$ATUIN_RELEASE.tar.gz"; \
+	rm -f "$$ATUIN_RELEASE.tar.gz"; \
+	echo "$$ATUIN_RELEASE" > .atuin_release_name
+
+override_dh_auto_install:
+	@ATUIN_RELEASE=$$(cat .atuin_release_name); \
+	install -D -m 755 "$$ATUIN_RELEASE/atuin" debian/atuin/usr/bin/atuin
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+	@if [ -f .atuin_release_name ]; then \
+		ATUIN_RELEASE=$$(cat .atuin_release_name); \
+		rm -rf "$$ATUIN_RELEASE" .atuin_release_name || true; \
+	fi
+
+override_dh_strip:
+
+override_dh_shlibdeps:

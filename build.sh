@@ -1,6 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-
 atuin_VERSION=$1
 BUILD_VERSION=$2
 ARCH=${3:-amd64}  # Default to amd64 if no architecture specified

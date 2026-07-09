@@ -50,10 +50,6 @@ To update to a new version, just follow any of the installation methods above. T
 
 ## Building
 
-**Status: not implemented yet.** The build scripts in this repository are currently stubs
-(see `build.sh`, `build_debian.sh`, `build_ubuntu.sh`, `build_src.sh`) and will exit
-non-zero until the atuin packaging logic is implemented.
-
 ### Build for single architecture
 ```sh
 ./build.sh <atuin_version> <build_version> <architecture>
@@ -68,10 +64,9 @@ non-zero until the atuin packaging logic is implemented.
 
 ## Roadmap
 
-- [ ] Implement build scripts (atuin is not yet packaged)
-- [ ] Produce a .deb package on GitHub Releases
-- [ ] Set up a debian mirror for easier updates
-- [ ] Multi-architecture support (amd64, arm64)
+- [x] Produce a .deb package on GitHub Releases
+- [x] Set up a debian mirror for easier updates
+- [x] Multi-architecture support (amd64, arm64)
 
 ## Disclaimer
 
